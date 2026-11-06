@@ -1,6 +1,6 @@
 # A Christmas Of Giving
 
-A web application designed for Grade 10 - Puting Krus to showcase their Christmas short film, photo gallery, custom audio player with a real-time visualizer, and project credits.
+A web application designed for Grade 10 - Puting Krus to showcase their Christmas short film.
 
 ---
 

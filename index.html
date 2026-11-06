@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Christmas Of Giving</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <!--Header-->
+    <header class="site-header">
+        <h1>A Christmas Of Giving</h1>
+
+        <!--Top menu: each link matches a section's data-page below-->
+        <nav class="site-nav" aria-label="Main menu">
+            <a href="#home" data-target="home">Home</a>
+            <a href="#gallery" data-target="gallery">Gallery</a>
+            <a href="#music" data-target="music">Music</a>
+            <a href="#credits" data-target="credits">Credits</a>
+        </nav>
+    </header>
+
+    <!--Main Content Area-->
+    <main class="content-container">
+        
+        <!--FB Embed-->
+        <section class="video-section" id="home" data-page="home">
+            <h2>A Christmas Of Giving</h2>
+            <div class="video-wrapper">
+                <iframe src="" 
+                        width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+
+                <!--Shown only when the iframe above has no src yet (script.js turns it on)-->
+                <div class="video-empty" id="videoEmpty" hidden>
+                    <p>VIDEO COMING SOON</p>
+                </div>
+
+                <!--Fallback: if the embed does not load, visitors can open the video on Facebook.
+                    script.js fills in the link from your iframe src. You can also paste the
+                    video's Facebook link straight into href below.-->
+                <p class="video-fallback" id="videoFallback">
+                    Video not loading?
+                    <a class="pixel-btn" id="watchLink" href="#" target="_blank" rel="noopener">Watch on Facebook</a>
+                </p>
+            </div>
+        </section>
+
+        <!--Message-->
+        <section class="message-section" data-page="home">
+            <h2>A Message from PK</h2>
+            <p>This holiday season reminds us of the importance of family, joy, and giving. Enjoy our short video created with passion and dedication by our section</p>
+        </section>
+
+        <!--GALLERY
+            1. Put your photos in the images folder.
+            2. Change each src to your photo's file name, and write a short alt (describes the photo) and caption.
+            3. To add more photos, copy a whole <figure> block.
+            The six pixel-art pictures are just samples. Replace them with your real photos.-->
+        <section class="gallery-section" id="gallery" data-page="gallery">
+            <h2>Gallery</h2>
+            <p class="gallery-intro">Behind the scenes of A Christmas Of Giving. Click a photo to see it bigger.</p>
+
+            <div class="gallery-grid">
+                <figure class="gallery-item">
+                    <button type="button" class="gallery-thumb">
+                        <img src="images/placeholder.jpg" alt="Pixel art of a decorated Christmas tree" loading="lazy">
+                    </button>
+                    <figcaption>[Caption 1]</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <button type="button" class="gallery-thumb">
+                        <img src="images/placeholder.jpg" alt="Pixel art of a wrapped gift with a gold ribbon" loading="lazy">
+                    </button>
+                    <figcaption>[Caption 2]</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <button type="button" class="gallery-thumb">
+                        <img src="images/placeholder.jpg" alt="Pixel art of a snowman in a top hat" loading="lazy">
+                    </button>
+                    <figcaption>[Caption 3]</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <button type="button" class="gallery-thumb">
+                        <img src="images/placeholder.jpg" alt="Pixel art of a candy cane" loading="lazy">
+                    </button>
+                    <figcaption>[Caption 4]</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <button type="button" class="gallery-thumb">
+                        <img src="images/placeholder.jpg" alt="Pixel art of a red Christmas stocking" loading="lazy">
+                    </button>
+                    <figcaption>[Caption 5]</figcaption>
+                </figure>
+
+                <figure class="gallery-item">
+                    <button type="button" class="gallery-thumb">
+                        <img src="images/placeholder.jpg" alt="Pixel art of a Christmas wreath with a red bow" loading="lazy">
+                    </button>
+                    <figcaption>[Caption 6]</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!--MUSIC (the boombox is controlled by script.js)-->
+        <section class="music-section" id="music" data-page="music">
+            <h2>Music</h2>
+
+            <div class="boombox" id="boombox">
+                <div class="boombox__screen" id="nowPlaying">Pick a song, then press Play</div>
+
+                <!--Real equalizer: script.js draws the sound of the song here-->
+                <canvas class="boombox__visualizer" id="visualizer" width="480" height="96" aria-hidden="true"></canvas>
+
+                <!--The real audio player (hidden, we use our own buttons)-->
+                <audio id="audio" preload="metadata"></audio>
+
+                <!--Song position bar + time-->
+                <div class="boombox__seek">
+                    <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Song position">
+                    <span id="timeText">0:00 / 0:00</span>
+                </div>
+
+                <!--Song list-->
+                <div class="boombox__tracks">
+                    <button type="button" class="pixel-btn track-btn is-active" data-src="music/pinoy-ako.mp3" data-title="Pinoy Ako">Orange And Lemons - Pinoy Ako</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/sa-aming-bahay-ang-aming-bati.mp3" data-title="Sa Aming Bahay Ang Aming Bati">Sa Aming Bahay Ang Aming Bati</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/snowman.mp3" data-title="Snowman">Sia - Snowman</button>
+                </div>
+
+                <div class="boombox__controls">
+                    <button type="button" class="pixel-btn" id="playBtn">Play</button>
+                    <button type="button" class="pixel-btn" id="stopBtn">Stop</button>
+                    <label class="boombox__volume">Volume
+                        <input type="range" id="volume" min="0" max="100" value="70">
+                    </label>
+                </div>
+            </div>
+
+            <p class="music-note">Audio files live in the music folder next to index.html.</p>
+        </section>
+
+        <!--CREDITS-->
+        <section class="credits-section" id="credits" data-page="credits">
+            <h2>Credits</h2>
+
+            <div class="credits-roll" tabindex="0" aria-label="Movie credits. Hover or focus to pause.">
+                <div class="credits-track">
+                    <p class="credits-title">A Christmas Of Giving</p>
+                    <p class="credits-name">A short film by<br>Grade 10 - Puting Krus</p>
+
+                    <p class="credits-role">Directed by</p>
+                    <p class="credits-name">[Name]</p>
+
+                    <p class="credits-role">Written by</p>
+                    <p class="credits-name">[Name]</p>
+
+                    <p class="credits-role">Cast</p>
+                    <p class="credits-name">[Name]<br>[Name]<br>[Name]<br>[Name]</p>
+
+                    <p class="credits-role">Cinematography</p>
+                    <p class="credits-name">[Name]</p>
+
+                    <p class="credits-role">Video Editing</p>
+                    <p class="credits-name">[Name]</p>
+
+                    <p class="credits-role">Costumes &amp; Props</p>
+                    <p class="credits-name">[Name]<br>[Name]</p>
+
+                    <p class="credits-role">Website Design &amp; Code</p>
+                    <p class="credits-name">[Name]</p>
+
+                    <p class="credits-role">Music</p>
+                    <p class="credits-name">[Song title - Artist]<br>[Song title - Artist]</p>
+
+                    <p class="credits-role">Special Thanks</p>
+                    <p class="credits-name">[Adviser's name]<br>[School name]<br>Our families and friends</p>
+
+                    <p class="credits-title">Maligayang Pasko!</p>
+                    <p class="credits-name">Merry Christmas from Grade 10 - Puting Krus</p>
+                </div>
+            </div>
+
+            <p class="music-note">Hover over the credits to pause them.</p>
+        </section>
+
+    </main>
+
+    <!--Footer-->
+    <footer class="site-footer">
+        <p>&copy; BFSJNHS Grade 10 - Puting Krus S.Y. 2026 - 2027. All Rights Reserved.</p>
+    </footer>
+
+
+
+
+</body>
+</html>

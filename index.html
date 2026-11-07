@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Christmas Of Giving</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/deer.gif" type="image/x-icon">
     <script src="script.js"></script>
 </head>
 <body>
@@ -34,7 +35,7 @@
 
                 <!--Shown only when the iframe above has no src yet (script.js turns it on)-->
                 <div class="video-empty" id="videoEmpty" hidden>
-                    <p>VIDEO COMING SOON</p>
+                    <p>bidyo coming soon</p>
                 </div>
 
                 <!--Fallback: if the embed does not load, visitors can open the video on Facebook.
@@ -117,7 +118,7 @@
                 <!--Real equalizer: script.js draws the sound of the song here-->
                 <canvas class="boombox__visualizer" id="visualizer" width="480" height="96" aria-hidden="true"></canvas>
 
-                <!--The real audio player (hidden, we use our own buttons)-->
+                <!--The real audio player (hidden)-->
                 <audio id="audio" preload="metadata"></audio>
 
                 <!--Song position bar + time-->
@@ -129,8 +130,11 @@
                 <!--Song list-->
                 <div class="boombox__tracks">
                     <button type="button" class="pixel-btn track-btn is-active" data-src="music/pinoy-ako.mp3" data-title="Pinoy Ako">Orange And Lemons - Pinoy Ako</button>
-                    <button type="button" class="pixel-btn track-btn" data-src="music/sa-aming-bahay-ang-aming-bati.mp3" data-title="Sa Aming Bahay Ang Aming Bati">Sa Aming Bahay Ang Aming Bati</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/totoong-tayo.mp3" data-title="Totoong Tayo">Jin DC - Totoong Tayo</button>
                     <button type="button" class="pixel-btn track-btn" data-src="music/snowman.mp3" data-title="Snowman">Sia - Snowman</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/ako-ang-bagyo.mp3" data-title="Ako ang Bagyo">SHEAN - Ako Ang Bagyo</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/na-para-bang.mp3" data-title="Na Para Bang">Mariah Deborah - Na Para Bang</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/kampana-ng-simbahan.mp3" data-title="Kampana Ng Simbahan">Kampana Ng Simbahan</button>
                 </div>
 
                 <div class="boombox__controls">
@@ -142,54 +146,60 @@
                 </div>
             </div>
 
-            <p class="music-note">Audio files live in the music folder next to index.html.</p>
+            <p class="music-note">official playlist ng pk pang ber-months</p>
         </section>
 
         <!--CREDITS-->
         <section class="credits-section" id="credits" data-page="credits">
             <h2>Credits</h2>
 
-            <div class="credits-roll" tabindex="0" aria-label="Movie credits. Hover or focus to pause.">
+            <div class="credits-roll" tabindex="0" aria-label="">
                 <div class="credits-track">
                     <p class="credits-title">A Christmas Of Giving</p>
                     <p class="credits-name">A short film by<br>Grade 10 - Puting Krus</p>
 
-                    <p class="credits-role">Directed by</p>
-                    <p class="credits-name">[Name]</p>
-
-                    <p class="credits-role">Written by</p>
-                    <p class="credits-name">[Name]</p>
+                    <p class="credits-role">Directed and Written by</p>
+                    <p class="credits-name">Dhexam Casupang</p>
 
                     <p class="credits-role">Cast</p>
                     <p class="credits-name">[Name]<br>[Name]<br>[Name]<br>[Name]</p>
 
                     <p class="credits-role">Cinematography</p>
-                    <p class="credits-name">[Name]</p>
+                    <p class="credits-name">Czeiana Sta Ana<br>Francesca De Jesus</p>
 
                     <p class="credits-role">Video Editing</p>
-                    <p class="credits-name">[Name]</p>
-
-                    <p class="credits-role">Costumes &amp; Props</p>
-                    <p class="credits-name">[Name]<br>[Name]</p>
+                    <p class="credits-name">Kyler San Jose</p>
 
                     <p class="credits-role">Website Design &amp; Code</p>
-                    <p class="credits-name">[Name]</p>
+                    <p class="credits-name">Simon Cruz</p>
 
                     <p class="credits-role">Music</p>
-                    <p class="credits-name">[Song title - Artist]<br>[Song title - Artist]</p>
+                    <p class="credits-name">Pinoy Ako - Orange And Lemons<br>Kampana Ng Simbahan</p>
 
                     <p class="credits-role">Special Thanks</p>
-                    <p class="credits-name">[Adviser's name]<br>[School name]<br>Our families and friends</p>
+                    <p class="credits-name">Maam Hazel Rosal<br>BFSJNHS<br>Our families and friends</p>
 
                     <p class="credits-title">Maligayang Pasko!</p>
-                    <p class="credits-name">Merry Christmas from Grade 10 - Puting Krus</p>
+                    <p class="credits-name">from Grade 10 - Puting Krus ♡</p>
                 </div>
             </div>
 
-            <p class="music-note">Hover over the credits to pause them.</p>
+            <p class="music-note"></p>
         </section>
 
     </main>
+
+    <!--MINI PLAYER na hindi ko alam gawin kaya nagpatulong ako sa ai sorrey-->
+    <div class="mini-player" id="miniPlayer" hidden>
+        <a class="mini-player__title" id="miniTitle" href="#music" title="Open the Music page">Pick a song</a>
+        <canvas class="mini-player__visualizer" id="miniVisualizer" width="160" height="40" aria-hidden="true"></canvas>
+        <div class="mini-player__controls">
+            <button type="button" class="pixel-btn" id="miniPrev" aria-label="Previous song">&lt;&lt;</button>
+            <button type="button" class="pixel-btn" id="miniPlay">Play</button>
+            <button type="button" class="pixel-btn" id="miniStop">Stop</button>
+            <button type="button" class="pixel-btn" id="miniNext" aria-label="Next song">&gt;&gt;</button>
+        </div>
+    </div>
 
     <!--Footer-->
     <footer class="site-footer">

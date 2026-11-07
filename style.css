@@ -593,7 +593,7 @@ a:hover {
 }
 
 /* =========================================================
-   SNOW CANVAS  (injected by script.js)
+   SNOW CANVAS 
    ========================================================= */
 .snow-canvas {
     position: fixed;
@@ -605,7 +605,7 @@ a:hover {
 }
 
 /* =========================================================
-   TOP MENU  (Home / Gallery / Music / Credits)
+   TOP MENU 
    ========================================================= */
 .site-nav {
     display: flex;
@@ -649,7 +649,7 @@ a:hover {
 }
 
 /* =========================================================
-   CREDITS  (movie-style scrolling roll)
+   CREDITS 
    ========================================================= */
 .credits-roll {
     position: relative;
@@ -706,7 +706,7 @@ a:hover {
 }
 
 /* =========================================================
-   MUSIC  (boombox)
+   MUSIC 
    ========================================================= */
 .boombox {
     margin: 16px;
@@ -768,13 +768,13 @@ a:hover {
     gap: 10px;
 }
 
-/* ---------- Playlist: a scrollable list, so you can add as many songs as you want ---------- */
+/* ---------- Playlist ---------- */
 .boombox__tracks {
     position: relative;                  /* script.js measures song positions from here */
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-height: 214px;                   /* about 5 songs visible, change this to show more or fewer */
+    max-height: none;                   /* about 5 songs visible, change this to show more or fewer */
     margin-bottom: 14px;
     padding: 8px 10px 10px 8px;
     overflow-y: auto;
@@ -941,5 +941,83 @@ a:hover {
 
     .credits-track {
         padding: 16px;
+    }
+}
+
+/* =========================================================
+   MINI PLAYER  -  floats bottom right while you browse
+   ========================================================= */
+.mini-player {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 998;                        /* under the snow and the photo viewer */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 290px;
+    max-width: calc(100vw - 32px);
+    padding: 10px;
+    background: var(--crimson-dark);
+    border: 3px solid var(--snow);
+    box-shadow: 5px 5px 0 #000;
+}
+
+.mini-player[hidden] {
+    display: none;
+}
+
+.mini-player__title {
+    display: block;
+    padding: 2px 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: var(--font-pixel);
+    font-size: 1.2rem;
+    color: var(--crt);
+    text-decoration: none;
+    background: #9bbc5a;
+    border: 2px solid #5c7a2e;
+}
+
+.mini-player__title:hover {
+    background: var(--neon);
+}
+
+.mini-player__visualizer {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background: var(--crt);
+    border: 2px dotted var(--gold);
+    image-rendering: pixelated;
+}
+
+.mini-player__controls {
+    display: flex;
+    gap: 6px;
+}
+
+.mini-player__controls .pixel-btn {
+    flex: 1;
+    padding: 2px 4px;
+    font-size: 1.15rem;
+    box-shadow: 3px 3px 0 #000;
+}
+
+/* leave room so the player never covers the footer text
+   (padding is on the footer itself, so its dark background just grows) */
+body.has-mini .site-footer {
+    padding-bottom: 180px;
+}
+
+@media (max-width: 480px) {
+    .mini-player {
+        right: 8px;
+        bottom: 8px;
+        left: 8px;
+        width: auto;
+        max-width: none;
     }
 }

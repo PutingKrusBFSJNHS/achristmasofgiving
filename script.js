@@ -85,7 +85,9 @@ function addTicker() {
 
     "Merry Christmas Po!!! *** " +
 
-    "Ha?          Ha?         Hatdog. *** ";
+    "Ha?          Ha?         Hatdog. *** "+
+
+    "Kung gusto mong lumiwanag ang pasko mo, kumain ka ng christmas lights. *** ";
 
     ticker.appendChild(text);
     // insert the ticker right after the header
@@ -512,9 +514,9 @@ function initNav() {
             }
         }
 
-        // pause the boombox when leaving the Music page
-        // (so it does not play over the video)
-        if (name !== "music" && musicPlayer) musicPlayer.pause();
+        // the music keeps playing on every page; the mini player
+        // (bottom right) shows up whenever we are NOT on the Music page
+        if (musicPlayer) musicPlayer.setAway(name !== "music");
     }
 
     // clicking a link: switch page and update the address (#about etc.)
@@ -559,9 +561,21 @@ function initMusic() {
     var timeText = document.getElementById("timeText");
     var canvas = document.getElementById("visualizer");
     var trackBtns = document.querySelectorAll(".track-btn");
+
+    // mini player (bottom right corner)
+    var mini = document.getElementById("miniPlayer");
+    var miniTitle = document.getElementById("miniTitle");
+    var miniCanvas = document.getElementById("miniVisualizer");
+    var miniPlay = document.getElementById("miniPlay");
+    var miniStop = document.getElementById("miniStop");
+    var miniPrev = document.getElementById("miniPrev");
+    var miniNext = document.getElementById("miniNext");
     if (!box || !audio || !canvas || trackBtns.length === 0) return;
 
     var ctx = canvas.getContext("2d");
+    var miniCtx = miniCanvas ? miniCanvas.getContext("2d") : null;
+    var started = false;           // true after the first Play (mini player stays after that)
+    var away = false;              // true when the visitor is NOT on the Music page
     var current = 0;               // which song button is selected
     var seeking = false;           // true while the visitor drags the slider
 
@@ -637,28 +651,34 @@ function initMusic() {
         for (var b = 0; b < BARS; b++) levels[b] *= 0.85;
     }
 
-    function drawBars() {
-        var w = canvas.width;
-        var h = canvas.height;
-        var blocks = Math.floor(h / (BLOCK_H + BLOCK_GAP));
+    // Draws the LED bars on any canvas (the big one and the mini one)
+    function drawOn(cv, cx, blockH, blockGap) {
+        var w = cv.width;
+        var h = cv.height;
+        var blocks = Math.floor(h / (blockH + blockGap));
         var colW = w / BARS;
-        var barW = colW - 4;
+        var barW = colW - Math.max(2, Math.round(colW * 0.25));
 
-        ctx.clearRect(0, 0, w, h);
+        cx.clearRect(0, 0, w, h);
 
         for (var b = 0; b < BARS; b++) {
             var lit = Math.round(levels[b] * blocks);
             for (var n = 0; n < blocks; n++) {
-                var y = h - (n + 1) * (BLOCK_H + BLOCK_GAP);
+                var y = h - (n + 1) * (blockH + blockGap);
                 if (n < lit) {
-                    // top two lit blocks turn red, like an old LED meter
-                    ctx.fillStyle = n >= blocks - 3 ? "#d6283f" : "#f7ff3c";
+                    // top lit blocks turn red, like an old LED meter
+                    cx.fillStyle = n >= blocks - 3 ? "#d6283f" : "#f7ff3c";
                 } else {
-                    ctx.fillStyle = "rgba(247, 255, 60, 0.07)";   // switched-off block
+                    cx.fillStyle = "rgba(247, 255, 60, 0.07)";   // switched-off block
                 }
-                ctx.fillRect(Math.round(b * colW + 2), y, Math.round(barW), BLOCK_H);
+                cx.fillRect(Math.round(b * colW + 1), y, Math.round(barW), blockH);
             }
         }
+    }
+
+    function drawBars() {
+        drawOn(canvas, ctx, BLOCK_H, BLOCK_GAP);
+        if (miniCtx && !mini.hidden) drawOn(miniCanvas, miniCtx, 4, 2);
     }
 
     // The animation loop. It runs while music plays, and until the bars sink.
@@ -717,6 +737,40 @@ function initMusic() {
         } else {
             screen.textContent = "Ready - " + currentTitle();
         }
+        syncMini();
+    }
+
+    /* ---------- MINI PLAYER ---------- */
+    function syncMini() {
+        if (!mini) return;
+        miniTitle.textContent = screen.textContent;
+        miniPlay.textContent = audio.paused ? "Play" : "Pause";
+    }
+
+    function refreshMini() {
+        if (!mini) return;
+        var show = away && started;
+        mini.hidden = !show;
+        document.body.classList.toggle("has-mini", show);
+        if (show) { syncMini(); startLoop(); drawBars(); }
+    }
+
+    function goNext() {
+        var wasPlaying = !audio.paused;
+        loadTrack((current + 1) % trackBtns.length);
+        if (wasPlaying) { play(); } else { updateScreen(); }
+    }
+
+    function goPrev() {
+        // like a real player: after 3 seconds, "previous" restarts the song
+        if (audio.currentTime > 3) {
+            audio.currentTime = 0;
+            updateTime();
+            return;
+        }
+        var wasPlaying = !audio.paused;
+        loadTrack((current - 1 + trackBtns.length) % trackBtns.length);
+        if (wasPlaying) { play(); } else { updateScreen(); }
     }
 
     // With a long playlist, scroll the list so the selected song is always in view
@@ -770,6 +824,8 @@ function initMusic() {
 
     // Audio element events keep the buttons and screen in sync
     audio.addEventListener("play", function () {
+        started = true;
+        refreshMini();
         playBtn.textContent = "Pause";
         updateScreen();
         startLoop();
@@ -796,6 +852,7 @@ function initMusic() {
         var code = audio.error ? audio.error.code : "?";
         screen.textContent = "Can't load " + trackBtns[current].getAttribute("data-src") +
             " (error " + code + ")";
+        syncMini();
 
         // Full details for debugging: press F12 and open the Console tab
         console.log("AUDIO ERROR | code:", code,
@@ -845,5 +902,21 @@ function initMusic() {
     drawBars();
 
     // let initNav() pause the music when the visitor leaves this page
-    musicPlayer = { pause: pause };
+    if (mini) {
+        miniPlay.addEventListener("click", function () {
+            if (audio.paused) { play(); } else { pause(); }
+        });
+        miniStop.addEventListener("click", stop);
+        miniPrev.addEventListener("click", goPrev);
+        miniNext.addEventListener("click", goNext);
+    }
+
+    // initNav() tells us when the visitor leaves / enters the Music page
+    musicPlayer = {
+        pause: pause,
+        setAway: function (isAway) {
+            away = isAway;
+            refreshMini();
+        }
+    };
 }

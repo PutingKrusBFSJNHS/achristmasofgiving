@@ -33,14 +33,12 @@
                 <iframe src="" 
                         width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
 
-                <!--Shown only when the iframe above has no src yet (script.js turns it on)-->
+                <!--Shown only when the iframe above has no src yet-->
                 <div class="video-empty" id="videoEmpty" hidden>
                     <p>bidyo coming soon</p>
                 </div>
 
-                <!--Fallback: if the embed does not load, visitors can open the video on Facebook.
-                    script.js fills in the link from your iframe src. You can also paste the
-                    video's Facebook link straight into href below.-->
+                <!--Fallback-->
                 <p class="video-fallback" id="videoFallback">
                     Video not loading?
                     <a class="pixel-btn" id="watchLink" href="#" target="_blank" rel="noopener">Watch on Facebook</a>
@@ -54,11 +52,7 @@
             <p>This holiday season reminds us of the importance of family, joy, and giving. Enjoy our short video created with passion and dedication by our section</p>
         </section>
 
-        <!--GALLERY
-            1. Put your photos in the images folder.
-            2. Change each src to your photo's file name, and write a short alt (describes the photo) and caption.
-            3. To add more photos, copy a whole <figure> block.
-            The six pixel-art pictures are just samples. Replace them with your real photos.-->
+        <!--GALLERY-->
         <section class="gallery-section" id="gallery" data-page="gallery">
             <h2>Gallery</h2>
             <p class="gallery-intro">Behind the scenes of A Christmas Of Giving. Click a photo to see it bigger.</p>
@@ -108,7 +102,7 @@
             </div>
         </section>
 
-        <!--MUSIC (the boombox is controlled by script.js)-->
+        <!--MUSIC-->
         <section class="music-section" id="music" data-page="music">
             <h2>Music</h2>
 
@@ -129,12 +123,14 @@
 
                 <!--Song list-->
                 <div class="boombox__tracks">
-                    <button type="button" class="pixel-btn track-btn is-active" data-src="music/pinoy-ako.mp3" data-title="Pinoy Ako">Orange And Lemons - Pinoy Ako</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/kampana-ng-simbahan.mp3" data-title="Kampana Ng Simbahan">Kampana Ng Simbahan</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/pinoy-ako.mp3" data-title="Pinoy Ako">Orange And Lemons - Pinoy Ako</button>
                     <button type="button" class="pixel-btn track-btn" data-src="music/totoong-tayo.mp3" data-title="Totoong Tayo">Jin DC - Totoong Tayo</button>
                     <button type="button" class="pixel-btn track-btn" data-src="music/snowman.mp3" data-title="Snowman">Sia - Snowman</button>
                     <button type="button" class="pixel-btn track-btn" data-src="music/ako-ang-bagyo.mp3" data-title="Ako ang Bagyo">SHEAN - Ako Ang Bagyo</button>
-                    <button type="button" class="pixel-btn track-btn" data-src="music/na-para-bang.mp3" data-title="Na Para Bang">Mariah Deborah - Na Para Bang</button>
-                    <button type="button" class="pixel-btn track-btn" data-src="music/kampana-ng-simbahan.mp3" data-title="Kampana Ng Simbahan">Kampana Ng Simbahan</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/lover-you-shouldve-come-over.mp3" data-title="Lover, You Should've Come Over">Jeff Buckley - Lover, You Should've Come Over</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/last-night-on-earth.mp3" data-title="Last Night On Earth">Green Day - Last Night On Earth</button>
+                    <button type="button" class="pixel-btn track-btn" data-src="music/champagne-supernova.mp3" data-title="Champagne Supernova">Oasis - Champagne Supernova</button>
                 </div>
 
                 <div class="boombox__controls">
@@ -176,7 +172,7 @@
                     <p class="credits-role">Music</p>
                     <p class="credits-name">Pinoy Ako - Orange And Lemons<br>Kampana Ng Simbahan</p>
 
-                    <p class="credits-role">Special Thanks</p>
+                    <p class="credits-role">Special Thanks to</p>
                     <p class="credits-name">Maam Hazel Rosal<br>BFSJNHS<br>Our families and friends</p>
 
                     <p class="credits-title">Maligayang Pasko!</p>
@@ -205,9 +201,5 @@
     <footer class="site-footer">
         <p>&copy; BFSJNHS Grade 10 - Puting Krus S.Y. 2026 - 2027. All Rights Reserved.</p>
     </footer>
-
-
-
-
 </body>
 </html>

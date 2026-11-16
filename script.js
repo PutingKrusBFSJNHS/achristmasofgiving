@@ -79,7 +79,7 @@ function addTicker() {
 
     "Maligayang Pask- Ay wala pa pala..... *** " +
 
-    "Ginawa ng may pagmamahal ng PK ni Maam HJ!! *** " +
+    "Ginawa nang may pagmamahal ng PK ni Maam HJ! *** " +
 
     "Like and Subscribe po *** " +
 
@@ -87,7 +87,9 @@ function addTicker() {
 
     "Ha?          Ha?         Hatdog. *** "+
 
-    "Kung gusto mong lumiwanag ang pasko mo, kumain ka ng christmas lights. *** ";
+    "PENOY AKOY PENOY!! *** "+
+
+    "Kung gusto mong lumiwanag ang pasko mo, kumain ka ng christmas light. *** ";
 
     ticker.appendChild(text);
     // insert the ticker right after the header
